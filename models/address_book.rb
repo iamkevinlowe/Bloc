@@ -19,10 +19,6 @@ class AddressBook
   end
 
   def remove_entry(entry)
-    @entries.delete_if do |item|
-      item.name == entry.name
-      item.phone_number == entry.phone_number
-      item.email == entry.email
-    end
+    @entries.delete(entry)
   end
 end
