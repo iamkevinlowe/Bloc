@@ -14,6 +14,7 @@ class MenuController
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
     puts "5 - Exit"
+    puts "6 - Delete all entries"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -37,6 +38,10 @@ class MenuController
     when 5
       puts "Good-bye!"
       exit(0)
+    when 6
+      system "clear"
+      detonate
+      main_menu
     else
       system "clear"
       puts "Sorry, that is not a valid input"
@@ -127,6 +132,21 @@ class MenuController
     rescue
       puts "#{file_name} is not a valid CSV file, please enter the name of a valid CSV file"
       read_csv
+    end
+  end
+
+  def detonate
+    print "Are you sure? "
+    answer = gets.chomp.downcase
+    if answer == "y" || answer == "yes"
+      while !@address_book.entries.empty?
+        delete_entry(@address_book.entries[0])
+      end
+      main_menu
+    else
+      system "clear"
+      puts "No entries have been deleted"
+      main_menu
     end
   end
 
